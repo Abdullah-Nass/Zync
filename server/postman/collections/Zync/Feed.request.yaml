@@ -1,0 +1,8 @@
+$kind: http-request
+name: Feed
+description: ""
+url: http://127.0.0.1:3000/feed
+method: GET
+headers:
+  Authorization: "{{vault:bearer_token_0k8g}}"
+order: 4501467648220970

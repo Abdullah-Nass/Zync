@@ -1,0 +1,20 @@
+import md5 from 'md5'
+
+function getAvatar(user: AuthUser) {
+  if (user.avatar_url) return user.avatar_url
+  const hash = md5(user.email.trim().toLowerCase())
+  return `https://www.gravatar.com/avatar/${hash}?d=identicon`
+}
+
+Option 2 — File upload with Cloudinary
+User uploads an image, you send it to Cloudinary, store the returned URL in avatar_url. This is the professional approach and what real apps do.
+
+The flow:
+
+User picks file
+  ↓
+Frontend sends it to Cloudinary API
+  ↓
+Cloudinary returns a URL
+  ↓
+You save that URL to your DB via PUT /users/:username

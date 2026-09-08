@@ -1,0 +1,13 @@
+$kind: http-request
+name: Edit user
+description: ""
+url: http://localhost:3000/users/:username
+method: PUT
+headers:
+  Authorization: "{{vault:bearer_token_0k8g}}"
+pathVariables:
+  username: ""
+body:
+  type: json
+  content: "{\r\n\r\n    \"bio\":\"New bio\"\r\n}"
+order: 4472891374307719

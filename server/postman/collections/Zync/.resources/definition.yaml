@@ -1,0 +1,9 @@
+$kind: collection
+name: Zync
+variables:
+  - key: bearer_token_0k8g
+    secret: true
+    disabled: false
+  - key: json_web_token_06me
+    secret: true
+    disabled: false

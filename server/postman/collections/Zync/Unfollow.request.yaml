@@ -1,0 +1,8 @@
+$kind: http-request
+name: Unfollow
+description: ""
+url: http://localhost:3000/users/Ahmad/follow
+method: DELETE
+headers:
+  Authorization: "{{vault:bearer_token_0k8g}}"
+order: 4496441969599627

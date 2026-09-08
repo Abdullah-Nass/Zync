@@ -1,0 +1,8 @@
+$kind: http-request
+name: Unlike
+description: ""
+url: http://localhost:3000/posts/:id/like
+method: DELETE
+headers:
+  Authorization: "{{vault:bearer_token_0k8g}}"
+order: 3185444065042502

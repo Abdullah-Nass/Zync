@@ -1,0 +1,15 @@
+$kind: http-request
+name: Create Post
+description: ""
+url: http://localhost:3000/posts
+method: POST
+headers:
+  Authorization: "{{bearer_token_0k8g}}"
+body:
+  type: json
+  content: "{\r
+
+    \"content\": \"post content\"\r
+
+    }"
+order: 2990764549253758

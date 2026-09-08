@@ -1,0 +1,10 @@
+$kind: http-request
+name: Get user posts
+description: ""
+url: http://localhost:3000/posts/user/:username
+method: GET
+headers:
+  Authorization: "{{vault:bearer_token_0k8g}}"
+pathVariables:
+  username: ""
+order: 4021326585033450

@@ -1,0 +1,20 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NITRO_PRESET = "netlify"
+
+# Proxies frontend /api/* requests directly to Render root routes
+[[redirects]]
+  from = "/api/*"
+  to = "https://zync-api-m30y.onrender.com/:splat"
+  status = 200
+  force = true
+  headers = { X-Forwarded-Host = "zync-app.netlify.app" }
+
+# Handles client-side / SSR routing for TanStack Start
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/server"
+  status = 200

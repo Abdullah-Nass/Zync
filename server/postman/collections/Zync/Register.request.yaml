@@ -1,0 +1,19 @@
+$kind: http-request
+name: Register
+description: ""
+url: http://localhost:3000/auth/register
+method: POST
+body:
+  type: json
+  content: "\r
+
+    {\r
+
+    \  \"username\": \"abdullah\",\r
+
+    \  \"email\": \"abdullah@test.com\",\r
+
+    \  \"password\": \"123456\"\r
+
+    }"
+order: 1788112694938

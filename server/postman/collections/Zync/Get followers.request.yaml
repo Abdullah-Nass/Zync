@@ -1,0 +1,10 @@
+$kind: http-request
+name: Get followers
+description: ""
+url: http://localhost:3000/users/:username/followers
+method: GET
+headers:
+  Authorization: "{{vault:bearer_token_0k8g}}"
+pathVariables:
+  username: ""
+order: 4498965512303624
