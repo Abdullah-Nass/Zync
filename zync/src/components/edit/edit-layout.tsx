@@ -103,6 +103,7 @@ export default function EditLayout() {
                   <FieldLabel>Name</FieldLabel>
                   <Input
                     value={field.state.value}
+                    dir="auto"
                     onChange={(e) => field.handleChange(e.target.value)}
                     onBlur={field.handleBlur}
                     placeholder="Your name"
@@ -154,6 +155,7 @@ export default function EditLayout() {
                 <FieldLabel>Bio</FieldLabel>
                 <Textarea
                   value={field.state.value}
+                  dir="auto"
                   onChange={(e) => field.handleChange(e.target.value)}
                   onBlur={field.handleBlur}
                   placeholder="Tell people about yourself"

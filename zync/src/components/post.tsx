@@ -43,7 +43,6 @@ export default function Post({ post }: { post: PostsResponse }) {
 
       <p
         dir="auto"
-
         className="px-2 text-sm leading-relaxed whitespace-pre-wrap"
       >
         {post.content}

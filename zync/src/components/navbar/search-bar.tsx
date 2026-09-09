@@ -66,6 +66,7 @@ export default function SearchBar() {
         <Search className="absolute left-2.5 h-4 w-4 text-muted-foreground" />
         <Input
           type="search"
+          dir="auto"
           value={query}
           onChange={(e) => {
             setQuery(e.target.value)

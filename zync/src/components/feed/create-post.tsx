@@ -114,6 +114,7 @@ export default function CreatePost() {
               return (
                 <Field data-invalid={hasError}>
                   <Textarea
+                    dir="auto"
                     value={field.state.value}
                     onChange={(e) => {
                       field.handleChange(e.target.value)
