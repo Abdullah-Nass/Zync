@@ -4,7 +4,7 @@ export const createPost = async (req, res) => {
   const { content } = req.body;
   const userId = req.user.id;
 
-  if (!content || content.trim() === "")
+  if (!content.trim())
     return res.status(400).json({ error: "Content is required" });
 
   if (content.length > 500)
