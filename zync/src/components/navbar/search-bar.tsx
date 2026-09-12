@@ -65,7 +65,7 @@ export default function SearchBar() {
       <div className="relative flex items-center">
         <Search className="absolute left-2.5 h-4 w-4 text-muted-foreground" />
         <Input
-          type="search"
+          type="text"
           dir="auto"
           value={query}
           onChange={(e) => {

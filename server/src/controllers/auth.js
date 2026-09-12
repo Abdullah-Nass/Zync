@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 const isProduction = process.env.NODE_ENV === "production";
 
+// Defining the security and delivery rules
 const COOKIE_OPTIONS = {
   httpOnly: true,
   secure: isProduction,
@@ -13,14 +14,23 @@ const COOKIE_OPTIONS = {
 export const register = async (req, res) => {
   const { name, username, email, password } = req.body;
 
-  if (!name || !username || !email || !password) {
+  // 1. Check existence and string types
+  if (
+    typeof name !== "string" ||
+    typeof username !== "string" ||
+    typeof email !== "string" ||
+    typeof password !== "string"
+  ) {
     return res.status(400).json({ error: "All fields are required" });
   }
 
+  const trimmedName = name.trim();
   const trimmedUsername = username.trim();
+  const normalizedEmail = email.trim().toLowerCase();
 
-  if (!trimmedUsername) {
-    return res.status(400).json({ error: "Username is required" });
+  // Check if all fields exist
+  if (!trimmedName || !trimmedUsername || !normalizedEmail || !password) {
+    return res.status(400).json({ error: "All fields are required" });
   }
 
   if (trimmedUsername.length < 3) {
@@ -38,7 +48,7 @@ export const register = async (req, res) => {
   try {
     const existing = await pool.query(
       "SELECT id FROM users WHERE email = $1 OR username = $2",
-      [email, trimmedUsername],
+      [normalizedEmail, trimmedUsername],
     );
     if (existing.rows.length > 0) {
       return res.status(409).json({ error: "Email or username already taken" });
@@ -50,7 +60,7 @@ export const register = async (req, res) => {
       `INSERT INTO users (name, username, email, password)
        VALUES ($1, $2, $3, $4)
        RETURNING id, name, username, email, created_at`,
-      [name.trim(), trimmedUsername, email.trim().toLowerCase(), hashed],
+      [trimmedName, trimmedUsername, normalizedEmail, hashed],
     );
 
     const user = result.rows[0];
@@ -73,12 +83,18 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
-  if (!email || !password)
+  if (typeof email !== "string" || typeof password !== "string") {
+    return res.status(400).json({ error: "All fields are required" });
+  }
+
+  const normalizedEmail = email.trim().toLowerCase();
+
+  if (!normalizedEmail || !password)
     return res.status(400).json({ error: "All fields are required" });
 
   try {
     const result = await pool.query("SELECT * FROM users WHERE email = $1", [
-      email,
+      normalizedEmail,
     ]);
     const user = result.rows[0];
 
