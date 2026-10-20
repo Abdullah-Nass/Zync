@@ -22,6 +22,7 @@ import { useState } from 'react'
 import { login } from '#/lib/api/auth'
 import { setUser } from '#/lib/auth'
 import { useSlide } from '../hooks/use-slide'
+import { PasswordInput } from './password-input'
 
 export interface FormField {
   handleChange: (value: any) => void
@@ -32,6 +33,7 @@ export interface FormField {
     }
   }
 }
+
 export function LoginForm({
   className,
   ...props
@@ -39,6 +41,7 @@ export function LoginForm({
   const [serverError, setServerError] = useState<string | null>(null)
   const navigate = useNavigate()
   const slideBoxRef = useSlide()
+
   const form = useForm({
     defaultValues: {
       email: '',
@@ -58,6 +61,7 @@ export function LoginForm({
       }
     },
   })
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     field: FormField,
@@ -68,6 +72,7 @@ export function LoginForm({
       field.handleBlur()
     }
   }
+
   return (
     <div
       className={cn(
@@ -80,7 +85,7 @@ export function LoginForm({
       <h1 className="absolute top-5 left-1/2 -translate-x-1/2 text-primary font-bold text-4xl mb-3 select-none lg:hidden">
         Zync
       </h1>
-      <Card className="w-full max-w-md ">
+      <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle>Login to your account</CardTitle>
           <CardDescription>
@@ -121,10 +126,9 @@ export function LoginForm({
                         type="email"
                         placeholder="e.g. abdula.naser04@gmail.com"
                         value={field.state.value}
-                        onChange={(e) => {
-                          handleChange(e, field)
-                        }}
+                        onChange={(e) => handleChange(e, field)}
                         onBlur={field.handleBlur}
+                        aria-invalid={hasError}
                       />
                       {hasError && (
                         <FieldError className="text-destructive">
@@ -135,6 +139,7 @@ export function LoginForm({
                   )
                 }}
               </form.Field>
+
               <form.Field
                 name="password"
                 validators={{
@@ -151,16 +156,15 @@ export function LoginForm({
                   return (
                     <Field data-invalid={hasError}>
                       <FieldLabel htmlFor="password">Password</FieldLabel>
-                      <Input
+                      <PasswordInput
                         id="password"
                         autoComplete="current-password"
-                        type="password"
                         name="password"
+                        placeholder="Enter your password"
                         value={field.state.value}
-                        onChange={(e) => {
-                          handleChange(e, field)
-                        }}
+                        onChange={(e) => handleChange(e, field)}
                         onBlur={field.handleBlur}
+                        aria-invalid={hasError}
                       />
                       {hasError && (
                         <FieldError className="text-destructive">
@@ -171,7 +175,9 @@ export function LoginForm({
                   )
                 }}
               </form.Field>
+
               {serverError && <FieldError>{serverError}</FieldError>}
+
               <form.Subscribe
                 selector={(state) => ({
                   isSubmitting: state.isSubmitting,
@@ -185,7 +191,7 @@ export function LoginForm({
                     </Button>
 
                     <FieldDescription className="text-center">
-                      Don't have an account?
+                      Don't have an account?{' '}
                       <Link
                         to="/register"
                         className="text-primary text-xs !no-underline hover:!underline"
