@@ -58,7 +58,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <HeadContent />
       </head>
-      <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-secondary">
+      <body
+        className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-secondary"
+        suppressHydrationWarning
+      >
         <AuthInitializer />
         {children}
         <Toaster position="bottom-left" />

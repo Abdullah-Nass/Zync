@@ -7,7 +7,7 @@ export const Route = createFileRoute('/logout')({
   component: Logout,
 })
 
-export default function Logout() {
+function Logout() {
   const [done, setDone] = useState(false)
 
   useEffect(() => {
